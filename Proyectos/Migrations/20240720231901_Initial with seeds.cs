@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Proyectos.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initialwithseeds : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,10 @@ namespace Proyectos.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FechaContratacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Puesto = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Puesto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,7 +33,7 @@ namespace Proyectos.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -51,7 +51,7 @@ namespace Proyectos.Migrations
                     EmpleadoId = table.Column<int>(type: "int", nullable: false),
                     ProyectoId = table.Column<int>(type: "int", nullable: false),
                     FechaAsignacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Rol = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Rol = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,6 +69,21 @@ namespace Proyectos.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Empleados",
+                columns: new[] { "ID", "Apellido", "FechaContratacion", "Nombre", "Puesto" },
+                values: new object[] { 1, "Meléndez", new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Roberto", "Web Developer" });
+
+            migrationBuilder.InsertData(
+                table: "Proyectos",
+                columns: new[] { "ID", "Descripcion", "FechaInicio", "Nombre" },
+                values: new object[] { 1, "Tienda en línea", new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Web Ecommerce" });
+
+            migrationBuilder.InsertData(
+                table: "Asignaciones",
+                columns: new[] { "ID", "EmpleadoId", "FechaAsignacion", "ProyectoId", "Rol" },
+                values: new object[] { 1, 1, new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Programador" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Asignaciones_EmpleadoId",

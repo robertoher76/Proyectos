@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Proyectos.Models.Asignacion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Nueva Asignación</a>
+</p>
+
+<form asp-controller="Asignaciones" asp-action="Index">
+    <p>
+        Rol: <input type="text" name="textoABuscar" class="form-control" />
+        <input type="submit" value="Filtrar" class="btn btn-info" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Empleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proyecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaAsignacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proyecto.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAsignacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -12,8 +12,8 @@ using Proyectos.Models;
 namespace Proyectos.Migrations
 {
     [DbContext(typeof(ProyectosDBContext))]
-    [Migration("20240713185204_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20240720231901_Initial with seeds")]
+    partial class Initialwithseeds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,8 +46,8 @@ namespace Proyectos.Migrations
 
                     b.Property<string>("Rol")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("ID");
 
@@ -56,6 +56,16 @@ namespace Proyectos.Migrations
                     b.HasIndex("ProyectoId");
 
                     b.ToTable("Asignaciones");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            EmpleadoId = 1,
+                            FechaAsignacion = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProyectoId = 1,
+                            Rol = "Programador"
+                        });
                 });
 
             modelBuilder.Entity("Proyectos.Models.Empleado", b =>
@@ -68,25 +78,35 @@ namespace Proyectos.Migrations
 
                     b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Puesto")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("ID");
 
                     b.ToTable("Empleados");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Apellido = "Meléndez",
+                            FechaContratacion = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Roberto",
+                            Puesto = "Web Developer"
+                        });
                 });
 
             modelBuilder.Entity("Proyectos.Models.Proyecto", b =>
@@ -107,12 +127,21 @@ namespace Proyectos.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("ID");
 
                     b.ToTable("Proyectos");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Descripcion = "Tienda en línea",
+                            FechaInicio = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Web Ecommerce"
+                        });
                 });
 
             modelBuilder.Entity("Proyectos.Models.Asignacion", b =>

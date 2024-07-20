@@ -23,10 +23,14 @@ namespace Proyectos.Models
         //propiedad de navegacion Empleado
         public Proyecto Proyecto { get; set; }
 
+        [Display(Name = "Fecha de Asignación")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "El campo fecha de asignación es requerido")]
         public DateTime FechaAsignacion { get; set; }
 
-        [StringLength(250)]
-        [Required]
+        [StringLength(200, MinimumLength = 3)]
+        [Display(Name = "Rol")]
+        [Required(ErrorMessage = "El campo rol es requerido")]
         public string Rol { get; set; }
     }
 }
